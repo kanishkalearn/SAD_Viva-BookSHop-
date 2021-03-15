@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Products" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="792" leftMargin="30" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1cd95a7e-6e29-41e0-b430-5e4125df5e1c">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="4"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+product.id_product,
+product_brand.brand,
+product_type.`type`,
+product.productname,
+product.unit, product.description,
+IF(product.state=1,"Active","Inactive") AS state
+FROM product INNER JOIN product_brand ON product.`product_brand`=product_brand.id
+INNER JOIN product_type ON product.`product_type`=product_type.id]]>
+	</queryString>
+	<field name="id_product" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="brand" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="productname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="unit" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="state" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="68" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="792" height="35" uuid="036a0190-c10c-4c08-af2f-53f706ee198b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chamara Book Shop]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="35" width="792" height="20" uuid="2a9796b7-624f-472c-adcb-3668917a7580"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="13"/>
+				</textElement>
+				<text><![CDATA[No: 32, Kebewa Road, Bandaragama]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="d86893a2-a2eb-4ed9-a51f-66e74606db5c"/>
+				<textElement>
+					<font fontName="Segoe UI" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRODUCTS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="504" y="0" width="288" height="20" uuid="d26fa94d-de12-44b8-8657-906d4183d2bc"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"+" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="114" height="25" backcolor="#F9F9F9" uuid="488e6e05-96ae-40bf-a51f-748714e97eaf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Item Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="114" y="0" width="96" height="25" backcolor="#F9F9F9" uuid="58d4fca3-33f2-4bb0-8eea-a9667db207d9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Brand]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="210" y="0" width="88" height="25" backcolor="#F9F9F9" uuid="ffb6b937-803c-4972-96b0-8bc9164166c4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Category]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="298" y="0" width="148" height="25" backcolor="#F9F9F9" uuid="f2fa3bfa-145a-4440-8f43-641abfed9aa4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Item]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="446" y="0" width="39" height="25" backcolor="#F9F9F9" uuid="08e52790-abaf-4a0f-af1e-63587f60a244"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Unit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="485" y="0" width="251" height="25" backcolor="#F9F9F9" uuid="4eba8303-e597-461a-a065-af5f826b3471"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="736" y="0" width="56" height="25" backcolor="#F9F9F9" uuid="f2e1cb5a-1770-4453-b99b-80653ed596aa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="114" height="20" uuid="1f7ec052-44ba-451f-a33b-0437999290f9"/>
+				<textElement>
+					<font fontName="Segoe UI" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_product}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="0" width="96" height="20" uuid="101b2b50-2e7d-49c1-aa41-97c1d57c44b5"/>
+				<textElement>
+					<font fontName="Segoe UI" size="11"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{brand}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="0" width="88" height="20" uuid="4a24de2c-c8fb-463e-84e6-fb13aad82f43"/>
+				<textElement>
+					<font fontName="Segoe UI" size="11"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="298" y="0" width="148" height="20" uuid="cee5229f-480d-4e37-b30e-54bf7e861a9c"/>
+				<textElement>
+					<font fontName="Segoe UI" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="0" width="39" height="20" uuid="352dd132-edb4-460c-a8f9-9d2466635ede"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="485" y="0" width="251" height="20" uuid="e38d5f2b-869b-4e24-b583-ba3a7232d19d"/>
+				<textElement>
+					<font fontName="Segoe UI" size="11"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="736" y="0" width="56" height="20" uuid="65620726-f025-4dcb-acbc-f1b75d8f24e9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{state}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="34" width="198" height="20" uuid="63958e7f-7e41-4295-953b-9657c45daf48"/>
+				<textElement>
+					<font fontName="Segoe UI" size="11"/>
+				</textElement>
+				<text><![CDATA[Chamara Book Shop  - Product Report]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="620" y="34" width="172" height="20" uuid="4763eb7b-cd22-40a0-9286-a53597402e8f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="11"/>
+					<paragraph rightIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SalesReturnReport" language="groovy" pageWidth="1050" pageHeight="595" orientation="Landscape" columnWidth="1010" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9cbe8e87-94ea-4755-848e-ce49727ee157">
+	<property name="ireport.zoom" value="1.0000000000000009"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="subPath" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dateFrom" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dateTo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{subPath}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+sales_return.id_srn,
+CAST(sales_return.date_created AS char)AS srndate,
+CAST(sales_return.time_created AS char) AS srntime,
+FORMAT(sales_return.`value`,2) AS srnvalue,
+sales_return.id_invoice,
+product.id_product,
+product.productname,
+sales_return_items.qty,
+FORMAT(sales_return_items.`value`,2) AS itemvalue
+FROM sales_return_items INNER JOIN sales_return ON sales_return_items.id_srn=sales_return.id_srn
+INNER JOIN product_stock ON sales_return_items.id_stock=product_stock.idproduct_stock
+INNER JOIN product ON product_stock.id_product=product.id_product WHERE sales_return.date_created BETWEEN $P{dateFrom} AND $P{dateTo}]]>
+	</queryString>
+	<field name="id_srn" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="srndate" class="java.lang.String"/>
+	<field name="srntime" class="java.lang.String"/>
+	<field name="srnvalue" class="java.lang.String"/>
+	<field name="id_invoice" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_product" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="productname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qty" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="itemvalue" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="1060" height="31" uuid="25c00248-19f7-4437-bb98-f2f43c99e168"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chamara Book Shop]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="31" width="1060" height="20" uuid="1145e18f-6d9c-4b50-ba98-94c817193917"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[No: 32, Kesbewa Road, Bandaragama]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="147" height="20" uuid="e6a1fce9-6d60-4cf7-bf27-ff2bbd9aca6f"/>
+				<textElement>
+					<font fontName="Calibri" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALES RETURN REPORT]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="200" y="0" width="85" height="20" uuid="d31eb43d-acbc-4a20-9b11-09ae5772f0f0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateFrom}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="285" y="0" width="21" height="20" uuid="58bcb5f1-410f-47f0-acb9-a1f4e5fb7daa"/>
+				<textElement>
+					<font fontName="Calibri" size="15"/>
+				</textElement>
+				<text><![CDATA[to]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="306" y="0" width="85" height="20" uuid="1c508311-5432-4b26-8aee-e93e5b26239f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateTo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="703" y="0" width="307" height="25" uuid="6e5ef56a-2b44-4a52-a591-4e02edb4652c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="11"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"+" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="108" height="25" backcolor="#F9F9F9" uuid="da6bc540-c329-4051-8e0f-92a7e0b8d4b1"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SRN No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="108" y="0" width="92" height="25" backcolor="#F9F9F9" uuid="78ab5395-6c11-4c6e-afde-154d39dbc950"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="200" y="0" width="49" height="25" backcolor="#F9F9F9" uuid="e5fd0643-a674-46a0-bb8c-6c51564c4450"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="249" y="0" width="123" height="25" backcolor="#F9F9F9" uuid="b01aef19-695d-4b4c-beed-d83564468c3a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="13" isBold="true"/>
+					<paragraph rightIndent="17"/>
+				</textElement>
+				<text><![CDATA[SRN Value]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="372" y="0" width="150" height="25" backcolor="#F9F9F9" uuid="f4397ec6-bb53-4d3c-925d-c37a6905036c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="13" isBold="true"/>
+					<paragraph leftIndent="12"/>
+				</textElement>
+				<text><![CDATA[Invoice No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="522" y="0" width="137" height="25" backcolor="#F9F9F9" uuid="2caabdec-457a-4534-bea7-470a9e4f0a44"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="13" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Item Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="659" y="0" width="196" height="25" backcolor="#F9F9F9" uuid="e1cffe46-70e2-4961-bde3-e5d847a74102"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="855" y="0" width="58" height="25" backcolor="#F9F9F9" uuid="89fa2340-a074-4b32-bf83-b61bfbe3ab5b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="13" isBold="true"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[SRN Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="913" y="0" width="97" height="25" backcolor="#F9F9F9" uuid="a8261ef0-05be-41b8-b2ac-fd7ebdea36c3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="13" isBold="true"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Item Value]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="108" height="20" uuid="e7f0b812-44c6-4e5d-b9c4-5faa7ae81aa3"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_srn}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="108" y="0" width="92" height="20" uuid="4974423d-1f5d-41d5-84eb-3a6d6fdebd5d"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{srndate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="200" y="0" width="49" height="20" uuid="946e2fa6-5d01-4d6f-a34c-612912c01ffe"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{srntime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="249" y="0" width="111" height="20" uuid="a9bf4da1-6294-40f6-92e0-78e6058c4430"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{srnvalue}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="372" y="0" width="150" height="20" uuid="7c108092-8104-4d10-8fca-922aca7b375f"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph leftIndent="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_invoice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="522" y="0" width="137" height="20" uuid="f35fdbfd-f5d4-4ce7-ba3d-54f360b432c8"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_product}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="659" y="0" width="196" height="20" uuid="e1df5991-f621-49ed-bae5-cd1d75db7391"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="855" y="0" width="58" height="20" uuid="8c9658aa-3de0-4426-b4dd-eb452492b311"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="913" y="0" width="97" height="20" uuid="3806fd85-b1d0-4431-baf1-88f48c72de15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itemvalue}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="57" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="17" width="249" height="20" uuid="4cbc2c18-bb69-4cba-9b6c-6657fbbf21ea"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<text><![CDATA[Chamara Book Shop  - Sales Return Report]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="798" y="17" width="212" height="20" uuid="20befa37-ce86-4ef9-8a11-de60aee0a557"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="10"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="61" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="391" height="47" uuid="4163d547-1b1a-4cd0-9243-4e1c0a94de3a"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="dateTo">
+					<subreportParameterExpression><![CDATA[$P{dateTo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="dateFrom">
+					<subreportParameterExpression><![CDATA[$P{dateFrom}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SalesReturnReport_Total.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

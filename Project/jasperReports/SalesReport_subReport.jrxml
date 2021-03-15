@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SalesReport_subReport" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e940469e-b4ae-4ef9-ab83-cfe181e3f7d9">
+	<property name="ireport.zoom" value="0.9090909090909108"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dateFrom" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dateTo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT FORMAT(SUM(invoice.subtotal),2) AS sum_subtotal, FORMAT(SUM(invoice.discount),2) AS sum_dis, FORMAT(SUM(invoice.net_total),2) AS sum_net
+ FROM invoice WHERE invoice.`date` BETWEEN $P{dateFrom} AND $P{dateTo}]]>
+	</queryString>
+	<field name="sum_subtotal" class="java.lang.String"/>
+	<field name="sum_dis" class="java.lang.String"/>
+	<field name="sum_net" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement mode="Transparent" x="532" y="2" width="107" height="25" backcolor="#F7F7F7" uuid="9f28eb19-cd07-4a74-96ec-9f1ac7558552"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sum_subtotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="639" y="2" width="107" height="25" backcolor="#F7F7F7" uuid="81404781-9099-4c5c-a245-1444379fff64"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sum_dis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="746" y="2" width="111" height="25" backcolor="#F7F7F7" uuid="913e4d42-f3f4-4c06-8200-d9bf93896076"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sum_net}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="438" y="2" width="92" height="25" uuid="d88424e8-09ea-4654-83e3-153911fe43ea"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="15"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="530" y="28" width="325" height="1" uuid="0505c7bf-b357-411e-9f18-9aa4295fa9f8"/>
+				<graphicElement>
+					<pen lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="530" y="2" width="325" height="1" uuid="8cbb446c-2296-4eb0-bccd-a2882642bfc7"/>
+				<graphicElement>
+					<pen lineWidth="0.4"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

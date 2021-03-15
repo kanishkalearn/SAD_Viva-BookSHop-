@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Stock" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="792" leftMargin="30" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0b36cb3c-55a1-4835-874c-7cc03326c9a4">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+product_stock.idproduct_stock AS idstock,
+product_stock.id_product,
+product.productname,
+product_stock.qty,
+FORMAT(product_stock.retail_price,2) AS retailprice
+FROM product_stock INNER JOIN product ON product_stock.id_product=product.id_product WHERE product_stock.qty >0;]]>
+	</queryString>
+	<field name="idstock" class="java.lang.String"/>
+	<field name="id_product" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="productname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qty" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="retailprice" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="35" width="792" height="20" uuid="6ce7e6a3-b5f5-4584-8d1d-e3cab5d643eb"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="13"/>
+				</textElement>
+				<text><![CDATA[No: 32, Kebewa Road, Bandaragama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="792" height="35" uuid="e21a7aea-33b3-40e3-ad54-62aacf8a4747"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chamara Book Shop]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="504" y="0" width="288" height="20" uuid="a6d10163-b9d5-4113-8c55-f90ed9445079"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"+" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="150" height="20" uuid="0c21a3dd-cfee-4fc8-9c84-2a4ae1f050ea"/>
+				<textElement>
+					<font fontName="Segoe UI" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRODUCT  STOCK]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="99" height="25" backcolor="#F9F7F7" uuid="79283cf2-04b9-41e7-bff7-a05f485a502d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="11"/>
+				</textElement>
+				<text><![CDATA[Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="99" y="0" width="174" height="25" backcolor="#F9F7F7" uuid="3a584a7b-05fa-4663-80fa-bb0aaf36831b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="11"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Item Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="273" y="0" width="368" height="25" backcolor="#F9F7F7" uuid="37b2b75d-f25c-4d02-aee3-882a1b2ef5ef"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="11"/>
+				</textElement>
+				<text><![CDATA[Item]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="641" y="0" width="81" height="25" backcolor="#F9F7F7" uuid="ec9f7998-0132-459c-9c3f-ef8c8f493aa6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="11"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Available Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="722" y="0" width="70" height="25" backcolor="#F9F7F7" uuid="4cc24817-5814-42c7-9acd-6491625b0da6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="11"/>
+					<paragraph rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[Retail Price]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="99" height="25" uuid="ed4c90dc-6a37-404d-bda2-7ae552fec99b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idstock}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="99" y="0" width="174" height="25" uuid="d9b89984-b9a1-4796-94bb-426aef483e23"/>
+				<textElement>
+					<font fontName="Segoe UI" size="11"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_product}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="273" y="0" width="368" height="25" uuid="07da7955-6ca9-4a93-975c-57809427bab8"/>
+				<textElement>
+					<font fontName="Segoe UI" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="641" y="0" width="66" height="25" uuid="3d191bc1-c7e4-44bf-940f-57e04a0f3f03"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="11"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="722" y="0" width="50" height="25" uuid="2ed6b3d1-f20d-40b5-9150-1e4fb02381be"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="11"/>
+					<paragraph rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{retailprice}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="34" width="234" height="20" uuid="23a268eb-80bb-46fb-b73e-b4e98dc86c0d"/>
+				<textElement>
+					<font fontName="Segoe UI" size="11"/>
+				</textElement>
+				<text><![CDATA[Chamara Book Shop  - Product Stock Report]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="620" y="34" width="172" height="20" uuid="765d2fe8-e844-40eb-aa2f-08e5ffc6fc26"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="11"/>
+					<paragraph rightIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

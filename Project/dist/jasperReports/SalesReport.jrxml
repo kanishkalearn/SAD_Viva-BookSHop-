@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SalesReport" language="groovy" pageWidth="900" pageHeight="612" orientation="Landscape" columnWidth="860" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7414eb9b-6c21-4d83-bce5-9eaecce934e6">
+	<property name="ireport.zoom" value="0.9090909090909091"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="7c82d9ef-a1f4-408f-ab56-6f438db356e9"/>
+	<parameter name="subPath" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dateFrom" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dateTo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{subPath}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT CAST(invoice.`date` AS char) AS inv_date, CAST(invoice.`time` AS char) AS inv_time, invoice.id_invoice, CONCAT(customer.fname," ",customer.lname) AS customername, invoice.payment_type,
+FORMAT(invoice.subtotal,2) AS subtotal, FORMAT(invoice.discount,2) AS discount, FORMAT(invoice.net_total,2) AS nettotal
+FROM invoice INNER JOIN customer ON invoice.id_customer=customer.id_customer WHERE invoice.`date` BETWEEN $P{dateFrom} AND $P{dateTo}]]>
+	</queryString>
+	<field name="inv_date" class="java.lang.String"/>
+	<field name="inv_time" class="java.lang.String"/>
+	<field name="id_invoice" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="customername" class="java.lang.String"/>
+	<field name="payment_type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="subtotal" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="discount" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nettotal" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="860" height="27" uuid="441f0bd0-7c09-4609-a9e2-fd4a89dbe04f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chamara Book Shop]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="27" width="860" height="20" uuid="c7f51371-f413-4007-903e-994ba8609d7d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[No: 32, Kesbewa Road, Bandaragama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="59" width="91" height="20" uuid="79e98b29-24e5-44b5-a9a9-e537b93b7c28"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Calibri" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALES REPORT]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="122" y="59" width="70" height="20" uuid="4b7623f2-e525-4336-9124-c215eaf06a97"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateFrom}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="192" y="59" width="16" height="20" uuid="3cb8407b-ccaf-40f4-88d7-4565cd2f3d9f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[to]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="222" y="59" width="84" height="20" uuid="65c7ce78-bf3e-40c5-9140-a9dec869b6d0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateTo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="552" y="59" width="308" height="20" uuid="f3d87a72-ebb1-481d-9a96-6dcfab566b4d"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"+" "+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="24" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="91" height="25" backcolor="#F3F3F3" uuid="76411b0f-f1a5-49aa-9cd5-9f1a82d46301"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Invoice Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="91" y="0" width="84" height="25" backcolor="#F3F3F3" uuid="2408926e-5e54-4e5f-97d8-2616c5554a9b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="175" y="0" width="123" height="25" backcolor="#F3F3F3" uuid="036ecae7-d712-4e82-8ad9-787fafd59e49"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Invoice No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="298" y="0" width="153" height="25" backcolor="#F3F3F3" uuid="ad89a56c-6eb2-48fb-81b1-9057445e6971"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Customer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="451" y="0" width="84" height="25" backcolor="#F3F3F3" uuid="8900a05d-6dbf-4ce7-9e78-7272c0d5cfc8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<text><![CDATA[Payment Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="535" y="0" width="107" height="25" backcolor="#F3F3F3" uuid="c0003f87-f5fa-4ec9-9349-3dbfac619247"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Sub Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="642" y="0" width="107" height="25" backcolor="#F3F3F3" uuid="f125e1e8-d718-406f-b20c-baa39f00fcf9"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Invoice Discount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="749" y="0" width="111" height="25" backcolor="#F3F3F3" uuid="f16efcd2-aa4c-4fd9-a241-169e54ae6f57"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Invoice Value]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="91" height="25" uuid="949a50f6-eee8-4c15-ae54-a871ae5f1b5d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inv_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="0" width="84" height="25" uuid="1f97dff1-4abd-46d8-94bf-d223af683590"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inv_time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="175" y="0" width="123" height="25" uuid="d79fa837-ad3c-4fd9-b159-44859affd3ff"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_invoice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="298" y="0" width="153" height="25" uuid="e637a7e0-26dd-4269-a94d-a6b9aad0f154"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customername}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="451" y="0" width="84" height="25" uuid="f82e277e-1225-401c-b334-24e68dce0b0e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payment_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="535" y="0" width="107" height="25" uuid="8247373c-6ecc-4cd1-88f7-d9d09bed8085"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="642" y="0" width="107" height="25" uuid="9dfcfd30-2ad2-47f3-8e5e-f20d6241c8c1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{discount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="749" y="0" width="111" height="25" uuid="a722c156-0d06-479c-b2ad-7ecaf1081610"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nettotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="36" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="663" y="34" width="197" height="20" uuid="cd4173d2-ad11-4060-8b66-0c8cbac97307"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="34" width="175" height="20" uuid="83487697-ed56-4db1-ade7-7a21fc130be9"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<text><![CDATA[Chamara Book Shop   -   Sales Report]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="53" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="860" height="42" uuid="80d8daa8-f8be-4a68-a4f3-29a2c82e0c01"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="dateTo">
+					<subreportParameterExpression><![CDATA[$P{dateTo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="dateFrom">
+					<subreportParameterExpression><![CDATA[$P{dateFrom}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SalesReport_subReport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

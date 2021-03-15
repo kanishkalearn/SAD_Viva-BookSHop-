@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SupplierHistoryPayble" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3f986b0a-138a-4d57-90a7-76af67f0de75">
+	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.x" value="309"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_supplier" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+FORMAT(SUM(grnvalue),2) AS totalgrn,
+FORMAT(SUM(netpay),2) AS netpaid,
+FORMAT(SUM(grnvalue)-SUM(netpay),2) AS payble FROM
+(
+SELECT grns.id_supplier,SUM(grns.`value`) AS grnvalue, 0 AS netpay
+FROM grn grns JOIN supplier suppliers ON suppliers.id_supplier=grns.id_supplier GROUP BY suppliers.id_supplier
+UNION
+SELECT payments.id_supplier, 0 AS grnvalue, SUM(payments.`value`) AS netpay
+FROM supplier_payment payments JOIN supplier suppliers ON suppliers.id_supplier=payments.id_supplier GROUP BY suppliers.id_supplier
+) x
+GROUP BY id_supplier HAVING id_supplier=$P{id_supplier}]]>
+	</queryString>
+	<field name="totalgrn" class="java.lang.String"/>
+	<field name="netpaid" class="java.lang.String"/>
+	<field name="payble" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="64" splitType="Stretch">
+			<textField>
+				<reportElement x="687" y="5" width="95" height="20" uuid="71d127cd-3263-46d2-81ec-2a29d61ce25f"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="11" isBold="true"/>
+					<paragraph rightIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalgrn}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="592" y="5" width="95" height="20" uuid="34868c02-8e1b-40c0-8a53-3e2b0a70ae37"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="11" isBold="true"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{netpaid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="687" y="40" width="95" height="20" uuid="cc6cf773-68b6-432c-95ca-760078873edb"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="11" isBold="true"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payble}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="592" y="2" width="190" height="1" uuid="18dc4136-5ca1-4425-b483-361810b3c0e2"/>
+			</line>
+			<line>
+				<reportElement x="592" y="27" width="190" height="1" uuid="508c6ecf-6546-47be-a046-83f842d32dd6"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="687" y="38" width="95" height="1" uuid="05916f46-fe3a-41f2-b435-419e9096c537"/>
+			</line>
+			<line>
+				<reportElement x="687" y="62" width="95" height="1" uuid="1cf6a644-23ca-48b0-a68b-4cad2903a95b"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="476" y="38" width="116" height="20" uuid="21c8c8f8-0978-4a80-9a12-6fbafa2f7792"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="11"/>
+				</textElement>
+				<text><![CDATA[Total Payble Amount]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

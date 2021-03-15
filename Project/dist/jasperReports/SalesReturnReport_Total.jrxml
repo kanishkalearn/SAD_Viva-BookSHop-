@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SalesReturnReport_Total" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ea65c0ab-aefe-46f1-b95e-b8c48695e32f">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dateFrom" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dateTo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT FORMAT(SUM(sales_return.`value`),2) AS srntotal FROM sales_return WHERE sales_return.date_created BETWEEN $P{dateFrom} AND $P{dateTo}]]>
+	</queryString>
+	<field name="srntotal" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="1" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="68" y="5" width="152" height="25" uuid="f583e707-1741-4604-8e6c-44e57dbbc400"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="15"/>
+				</textElement>
+				<text><![CDATA[Total Sales Retuns]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="235" y="5" width="125" height="25" uuid="f40156e0-4e52-457a-8bc3-70ad5913946d"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="15" isBold="true"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{srntotal}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="235" y="4" width="125" height="1" uuid="611a324a-3b3f-445b-9fe0-b48cb0d9b6dc"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="235" y="31" width="125" height="1" uuid="9f9f937b-a847-4adb-a43c-9002ff945fd2"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
